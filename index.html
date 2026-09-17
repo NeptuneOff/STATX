@@ -168,7 +168,6 @@
         overflow-x: hidden;
       }
 
-      body.menu-open,
       body.dialog-open {
         overflow: hidden;
       }
@@ -186,6 +185,18 @@
 
       button {
         color: inherit;
+      }
+
+      a[href],
+      button,
+      summary,
+      [role="button"] {
+        cursor: pointer;
+
+        -webkit-user-select: none;
+        user-select: none;
+
+        -webkit-tap-highlight-color: transparent;
       }
 
       ::selection {
@@ -232,7 +243,7 @@
 
         display: grid;
 
-        grid-template-columns: 1fr auto 1fr;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
 
         align-items: center;
 
@@ -260,6 +271,9 @@
           transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
           opacity 0.28s ease,
           box-shadow 0.28s ease;
+
+        -webkit-user-select: none;
+        user-select: none;
       }
 
       .site-header.is-visible {
@@ -274,8 +288,8 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
 
         grid-column: 2;
 
@@ -284,8 +298,8 @@
 
       .brand img {
         display: block;
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
         object-fit: contain;
         border-radius: 50%;
 
@@ -303,7 +317,9 @@
       .desktop-nav {
         display: flex;
 
-        gap: 32px;
+        align-items: center;
+
+        gap: 40px;
 
         font-size: 14px;
 
@@ -350,6 +366,12 @@
 
         justify-self: end;
 
+        position: relative;
+
+        isolation: isolate;
+
+        overflow: hidden;
+
         background: var(--ink);
 
         color: #fff;
@@ -364,7 +386,8 @@
 
         transition:
           transform 0.22s ease,
-          box-shadow 0.22s ease;
+          box-shadow 0.22s ease,
+          color 0.36s ease;
       }
 
       .header-cta:hover {
@@ -590,6 +613,19 @@
         pointer-events: none;
 
         transition: 0.25s ease;
+
+        max-height: calc(100dvh - 72px);
+
+        overflow-y: auto;
+
+        overscroll-behavior: contain;
+
+        touch-action: pan-y;
+
+        -webkit-overflow-scrolling: touch;
+
+        -webkit-user-select: none;
+        user-select: none;
       }
 
       .mobile-menu.open {
@@ -664,31 +700,6 @@
         cursor: pointer;
       }
 
-      .btn::after {
-        content: "";
-
-        position: absolute;
-
-        z-index: -1;
-
-        inset: -2px;
-
-        background: linear-gradient(
-          110deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.26) 50%,
-          transparent 70%
-        );
-
-        transform: translateX(-120%);
-
-        transition: transform 0.55s ease;
-      }
-
-      .btn:hover::after {
-        transform: translateX(120%);
-      }
-
       .btn span {
         font-size: 20px;
 
@@ -711,6 +722,127 @@
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
       }
 
+      :is(
+          .header-cta,
+          .btn-primary,
+          .btn-secondary,
+          .btn-light,
+          .mobile-menu a:last-child,
+          .mobile-dock a
+        ) {
+        position: relative;
+
+        isolation: isolate;
+
+        overflow: hidden;
+
+        transition:
+          transform 0.22s ease,
+          box-shadow 0.22s ease,
+          color 0.36s ease;
+      }
+
+      :is(
+          .header-cta,
+          .btn-primary,
+          .btn-secondary,
+          .btn-light,
+          .mobile-menu a:last-child,
+          .mobile-dock a
+        )::before {
+        content: "";
+
+        position: absolute;
+
+        z-index: -1;
+
+        top: 0;
+        left: -10%;
+
+        width: 120%;
+        height: 135%;
+
+        pointer-events: none;
+
+        border-radius: 48% 52% 42% 58% / 18% 18% 16% 16%;
+
+        transform: translateY(112%) rotate(-1.5deg);
+      }
+
+      :is(
+          .header-cta,
+          .btn-primary,
+          .mobile-menu a:last-child,
+          .mobile-dock a
+        ):hover {
+        color: var(--ink);
+      }
+
+      :is(
+          .btn-secondary,
+          .btn-light
+        ):hover {
+        color: #fff;
+      }
+
+      :is(
+          .header-cta,
+          .btn-primary,
+          .btn-secondary,
+          .btn-light,
+          .mobile-menu a:last-child,
+          .mobile-dock a
+        ):hover::before {
+        animation: buttonSweepIn 0.54s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      :is(
+          .header-cta,
+          .btn-primary,
+          .btn-secondary,
+          .btn-light,
+          .mobile-menu a:last-child,
+          .mobile-dock a
+        ).sweep-leaving::before {
+        animation: buttonSweepOut 0.46s cubic-bezier(0.55, 0, 0.45, 1) both;
+      }
+
+      :is(
+          .header-cta,
+          .btn-primary,
+          .mobile-menu a:last-child,
+          .mobile-dock a
+        )::before {
+        background: #fff;
+      }
+
+      :is(
+          .btn-secondary,
+          .btn-light
+        )::before {
+        background: var(--ink);
+      }
+
+      @keyframes buttonSweepIn {
+        from {
+          transform: translateY(112%) rotate(-1.5deg);
+        }
+
+        to {
+          transform: translateY(-15%) rotate(-1.5deg);
+        }
+      }
+
+      @keyframes buttonSweepOut {
+        from {
+          transform: translateY(-15%) rotate(-1.5deg);
+        }
+
+        to {
+          transform: translateY(-112%) rotate(-1.5deg);
+        }
+      }
+
       .btn-secondary {
         background: #fff;
 
@@ -720,7 +852,7 @@
       .btn-secondary:hover {
         transform: translateY(-2px);
 
-        background: var(--soft);
+        background: #fff;
 
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
       }
@@ -878,6 +1010,104 @@
         box-shadow: var(--shadow-strong);
       }
 
+      .visual-skill-bg {
+        position: absolute;
+
+        inset: -3%;
+
+        z-index: 0;
+
+        pointer-events: none;
+
+        opacity: 0;
+
+        background-image:
+          linear-gradient(
+            145deg,
+            rgba(30, 30, 30, 0.12),
+            rgba(30, 30, 30, 0.72)
+          ),
+          var(--skill-image);
+
+        background-repeat: no-repeat;
+
+        background-size: cover;
+
+        background-position: center;
+
+        filter: grayscale(1) contrast(1.08);
+
+        will-change: transform, opacity;
+      }
+
+      .visual-skill-bg.from-left {
+        animation: skillImageFromLeft 0.72s cubic-bezier(0.22, 1, 0.36, 1)
+          both;
+      }
+
+      .visual-skill-bg.from-right {
+        animation: skillImageFromRight 0.72s cubic-bezier(0.22, 1, 0.36, 1)
+          both;
+      }
+
+      .visual-skill-bg.from-bottom {
+        animation: skillImageFromBottom 0.72s
+          cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .visual-skill-bg.from-top {
+        animation: skillImageFromTop 0.72s cubic-bezier(0.22, 1, 0.36, 1)
+          both;
+      }
+
+      @keyframes skillImageFromLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-24%) scale(1.08);
+        }
+
+        to {
+          opacity: 0.5;
+          transform: translateX(0) scale(1.02);
+        }
+      }
+
+      @keyframes skillImageFromRight {
+        from {
+          opacity: 0;
+          transform: translateX(24%) scale(1.08);
+        }
+
+        to {
+          opacity: 0.5;
+          transform: translateX(0) scale(1.02);
+        }
+      }
+
+      @keyframes skillImageFromBottom {
+        from {
+          opacity: 0;
+          transform: translateY(24%) scale(1.08);
+        }
+
+        to {
+          opacity: 0.5;
+          transform: translateY(0) scale(1.02);
+        }
+      }
+
+      @keyframes skillImageFromTop {
+        from {
+          opacity: 0;
+          transform: translateY(-24%) scale(1.08);
+        }
+
+        to {
+          opacity: 0.5;
+          transform: translateY(0) scale(1.02);
+        }
+      }
+
       .visual-card:before,
       .visual-card:after {
         content: "";
@@ -889,6 +1119,8 @@
         border-radius: 50%;
 
         pointer-events: none;
+
+        z-index: 1;
       }
 
       .visual-card:before {
@@ -941,6 +1173,14 @@
       .skill-word {
         width: max-content;
 
+        border: 0;
+
+        padding: 0;
+
+        background: none;
+
+        text-align: left;
+
         font-size: clamp(42px, 5vw, 68px);
 
         font-weight: 700;
@@ -951,7 +1191,10 @@
 
         color: #5d5d59;
 
-        cursor: default;
+        cursor: pointer;
+
+        -webkit-user-select: none;
+        user-select: none;
 
         transition:
           color 0.34s ease,
@@ -2137,13 +2380,13 @@
         }
 
         .brand {
-          width: 58px;
-          height: 58px;
+          width: 64px;
+          height: 64px;
         }
 
         .brand img {
-          width: 58px;
-          height: 58px;
+          width: 64px;
+          height: 64px;
         }
 
         .desktop-nav,
@@ -2466,6 +2709,12 @@
 
         <div class="hero-visual reveal" aria-label="Bloc visuel STATX">
           <div class="visual-card" id="visual-card">
+            <div
+              class="visual-skill-bg"
+              id="visual-skill-bg"
+              aria-hidden="true"
+            ></div>
+
             <div class="visual-topline">
               <span> STATX / 001 </span>
 
@@ -2477,13 +2726,21 @@
               id="skill-rotator"
               aria-label="Disciplines travaillées"
             >
-              <div class="skill-word is-active">PLANCHE</div>
+              <button class="skill-word is-active" type="button">
+                PLANCHE
+              </button>
 
-              <div class="skill-word">FRONT LEVER</div>
+              <button class="skill-word" type="button">FRONT LEVER</button>
 
-              <div class="skill-word">HANDSTAND</div>
+              <button class="skill-word" type="button">HANDSTAND</button>
 
-              <div class="skill-word ellipsis">…</div>
+              <button
+                class="skill-word ellipsis"
+                type="button"
+                aria-label="Autres disciplines"
+              >
+                …
+              </button>
             </div>
 
             <div class="visual-bottom">
@@ -3209,6 +3466,41 @@
       });
 
       /* ======================================================
+       BALAYAGE DES BOUTONS
+    ====================================================== */
+
+      const sweepControls = document.querySelectorAll(
+        ".header-cta, .btn-primary, .btn-secondary, .btn-light, .mobile-menu a:last-child, .mobile-dock a",
+      );
+
+      sweepControls.forEach((control) => {
+        const startExitSweep = () => {
+          control.classList.remove("sweep-leaving");
+
+          void control.offsetWidth;
+
+          control.classList.add("sweep-leaving");
+        };
+
+        control.addEventListener("pointerenter", () => {
+          control.classList.remove("sweep-leaving");
+        });
+
+        control.addEventListener("pointerleave", startExitSweep);
+
+        control.addEventListener("pointercancel", startExitSweep);
+
+        control.addEventListener("animationend", (event) => {
+          if (
+            event.pseudoElement === "::before" &&
+            event.animationName === "buttonSweepOut"
+          ) {
+            control.classList.remove("sweep-leaving");
+          }
+        });
+      });
+
+      /* ======================================================
        ROTATION DES SKILLS
     ====================================================== */
 
@@ -3216,7 +3508,36 @@
 
       const skillWords = [...document.querySelectorAll(".skill-word")];
 
+      const skillCard = document.querySelector("#visual-card");
+
+      const skillBackground = document.querySelector("#visual-skill-bg");
+
+      const skillBackgrounds = [
+        {
+          image: "/planche.png",
+          direction: "from-left",
+          position: "center",
+        },
+        {
+          image: "/front.png",
+          direction: "from-right",
+          position: "center",
+        },
+        {
+          image: "/handstand.png",
+          direction: "from-bottom",
+          position: "center top",
+        },
+        {
+          image: "/autres.png",
+          direction: "from-top",
+          position: "center",
+        },
+      ];
+
       let activeSkill = 0;
+
+      let pinnedSkill = null;
 
       let skillTimer;
 
@@ -3225,7 +3546,40 @@
 
         skillWords.forEach((word, i) => {
           word.classList.toggle("is-active", i === activeSkill);
+
+          word.setAttribute(
+            "aria-pressed",
+            String(pinnedSkill === i),
+          );
         });
+      }
+
+      function showSkillBackground(index) {
+        const config = skillBackgrounds[index];
+
+        if (!config || !skillBackground) {
+          return;
+        }
+
+        skillBackground.classList.remove(
+          "from-left",
+          "from-right",
+          "from-bottom",
+          "from-top",
+        );
+
+        skillBackground.style.setProperty(
+          "--skill-image",
+          `url("${config.image}")`,
+        );
+
+        skillBackground.style.backgroundPosition = config.position;
+
+        void skillBackground.offsetWidth;
+
+        skillBackground.classList.add(config.direction);
+
+        skillCard?.classList.add("has-skill-image");
       }
 
       function startSkillRotation() {
@@ -3238,6 +3592,8 @@
         );
       }
 
+      setActiveSkill(0);
+
       startSkillRotation();
 
       skillRotator?.addEventListener("pointerenter", () => {
@@ -3249,13 +3605,27 @@
       skillRotator?.addEventListener("pointerleave", () => {
         skillRotator.classList.remove("is-hovering");
 
-        setActiveSkill(activeSkill);
+        if (pinnedSkill === null) {
+          setActiveSkill(activeSkill);
 
-        startSkillRotation();
+          startSkillRotation();
+        } else {
+          setActiveSkill(pinnedSkill);
+        }
       });
 
       skillWords.forEach((word, index) => {
         word.addEventListener("pointerenter", () => setActiveSkill(index));
+
+        word.addEventListener("click", () => {
+          pinnedSkill = index;
+
+          clearInterval(skillTimer);
+
+          setActiveSkill(index);
+
+          showSkillBackground(index);
+        });
       });
 
       /* ======================================================
