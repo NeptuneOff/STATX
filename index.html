@@ -5,11 +5,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Karl SW — STATX | Statique & calisthénie</title>
+    <title>Karl SW — STATX | Calisthénie Statique</title>
 
     <meta
       name="description"
-      content="Karl SW présente STATX : une méthode claire pour progresser en statique et calisthénie — planche, front lever, handstand, priorités et progression."
+      content="Karl SW présente STATX : une méthode claire pour progresser en calisthénie statique — planche, front lever, handstand, priorités et progression."
     />
 
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -19,6 +19,9 @@
     <meta name="theme-color" content="#ffffff" />
 
     <link rel="canonical" href="https://karl-sw.fr/" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
 
     <!-- ==========================================
        OPEN GRAPH / PARTAGE RÉSEAUX SOCIAUX
@@ -32,31 +35,35 @@
 
     <meta
       property="og:title"
-      content="Karl SW — STATX | Statique & calisthénie"
+      content="Karl SW — STATX | Calisthénie Statique"
     />
 
     <meta
       property="og:description"
-      content="Karl SW présente STATX : une méthode claire pour progresser en statique et calisthénie — planche, front lever, handstand, priorités et progression."
+      content="Karl SW présente STATX : une méthode claire pour progresser en calisthénie statique — planche, front lever, handstand, priorités et progression."
     />
 
     <meta property="og:url" content="https://karl-sw.fr/" />
+    <meta property="og:image" content="https://karl-sw.fr/logo.png" />
+    <meta property="og:image:alt" content="Logo STATX — calisthénie statique" />
 
     <!-- ==========================================
        X / TWITTER
   =========================================== -->
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <meta
       name="twitter:title"
-      content="Karl SW — STATX | Statique & calisthénie"
+      content="Karl SW — STATX | Calisthénie Statique"
     />
 
     <meta
       name="twitter:description"
-      content="Karl SW présente STATX : une méthode claire pour progresser en statique et calisthénie — planche, front lever, handstand, priorités et progression."
+      content="Karl SW présente STATX : une méthode claire pour progresser en calisthénie statique — planche, front lever, handstand, priorités et progression."
     />
+
+    <meta name="twitter:image" content="https://karl-sw.fr/logo.png" />
 
     <!-- ==========================================
        DONNÉES STRUCTURÉES GOOGLE
@@ -72,7 +79,7 @@
             "url": "https://karl-sw.fr/",
             "name": "STATX",
             "alternateName": ["Karl SW", "Karl-SW", "karl-sw.fr"],
-            "description": "Méthode de progression en statique et calisthénie : planche, front lever, handstand, priorités et progression.",
+            "description": "Méthode de progression en calisthénie statique : planche, front lever, handstand, priorités et progression.",
             "inLanguage": "fr-FR",
             "publisher": {
               "@id": "https://karl-sw.fr/#karl-sw"
@@ -83,14 +90,15 @@
             "@id": "https://karl-sw.fr/#karl-sw",
             "name": "Karl Daval-Leclercq",
             "alternateName": "Karl SW",
-            "url": "https://karl-sw.fr/"
+            "url": "https://karl-sw.fr/",
+            "image": "https://karl-sw.fr/logo.png"
           },
           {
             "@type": "WebPage",
             "@id": "https://karl-sw.fr/#webpage",
             "url": "https://karl-sw.fr/",
-            "name": "Karl SW — STATX | Statique & calisthénie",
-            "description": "Karl SW présente STATX : une méthode claire pour progresser en statique et calisthénie — planche, front lever, handstand, priorités et progression.",
+            "name": "Karl SW — STATX | Calisthénie Statique",
+            "description": "Karl SW présente STATX : une méthode claire pour progresser en calisthénie statique — planche, front lever, handstand, priorités et progression.",
             "isPartOf": {
               "@id": "https://karl-sw.fr/#website"
             },
@@ -263,11 +271,33 @@
       }
 
       .brand {
-        font-size: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
 
-        font-weight: 700;
+        grid-column: 2;
 
-        letter-spacing: 0.22em;
+        justify-self: center;
+      }
+
+      .brand img {
+        display: block;
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        border-radius: 50%;
+
+        transition:
+          transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+          filter 0.34s ease;
+      }
+
+      .brand:hover img {
+        transform: scale(1.055) rotate(-1.5deg);
+
+        filter: drop-shadow(0 7px 14px rgba(0, 0, 0, 0.1));
       }
 
       .desktop-nav {
@@ -276,6 +306,10 @@
         gap: 32px;
 
         font-size: 14px;
+
+        grid-column: 1;
+
+        justify-self: start;
       }
 
       .desktop-nav a {
@@ -312,6 +346,8 @@
       }
 
       .header-cta {
+        grid-column: 3;
+
         justify-self: end;
 
         background: var(--ink);
@@ -337,6 +373,36 @@
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
       }
 
+      .site-header.is-visible .desktop-nav,
+      .site-header.is-visible .brand,
+      .site-header.is-visible .header-cta,
+      .site-header.is-visible .menu-button {
+        animation: headerItemIn 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .site-header.is-visible .brand {
+        animation-delay: 0.035s;
+      }
+
+      .site-header.is-visible .header-cta,
+      .site-header.is-visible .menu-button {
+        animation-delay: 0.07s;
+      }
+
+      @keyframes headerItemIn {
+        from {
+          opacity: 0;
+
+          transform: translateY(-7px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0);
+        }
+      }
+
       /* ======================================================
        HEADER HANDLE
     ====================================================== */
@@ -349,8 +415,8 @@
 
         transform: translateX(-50%) translateY(-3px);
 
-        width: 84px;
-        height: 14px;
+        width: 112px;
+        height: 17px;
 
         z-index: 49;
 
@@ -359,11 +425,17 @@
         align-items: center;
         justify-content: center;
 
-        background: rgba(30, 30, 30, 0.94);
+        background: rgba(24, 24, 24, 0.98);
 
         border-radius: 0 0 15px 15px;
 
-        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+
+        border-top: 0;
+
+        box-shadow:
+          0 6px 22px rgba(0, 0, 0, 0.2),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.08);
 
         backdrop-filter: blur(12px);
 
@@ -389,16 +461,18 @@
 
         position: absolute;
 
-        inset: 0 -18px -14px -18px;
+        inset: 0 -26px -22px -26px;
       }
 
       .header-handle span {
-        width: 30px;
-        height: 2px;
+        width: 50px;
+        height: 3px;
 
         border-radius: 999px;
 
-        background: rgba(255, 255, 255, 0.74);
+        background: #dededb;
+
+        box-shadow: 0 1px 7px rgba(255, 255, 255, 0.34);
 
         transition:
           width 0.26s ease,
@@ -416,8 +490,8 @@
       }
 
       .header-handle:hover {
-        width: 108px;
-        height: 20px;
+        width: 136px;
+        height: 23px;
 
         background: #1e1e1e;
 
@@ -425,7 +499,7 @@
       }
 
       .header-handle:hover span {
-        width: 42px;
+        width: 58px;
 
         background: #fff;
       }
@@ -437,9 +511,9 @@
       @keyframes handlePulse {
         0%,
         100% {
-          opacity: 0.5;
+          opacity: 0.82;
 
-          transform: scaleX(0.88);
+          transform: scaleX(0.94);
         }
 
         50% {
@@ -463,6 +537,8 @@
         padding: 10px;
 
         justify-self: end;
+
+        grid-column: 3;
 
         cursor: pointer;
       }
@@ -917,6 +993,8 @@
         overflow: hidden;
 
         border-block: 1px solid var(--ink);
+
+        contain: paint;
       }
 
       .ticker-track {
@@ -924,27 +1002,39 @@
 
         width: max-content;
 
+        min-width: max-content;
+
+        gap: 0;
+
         will-change: transform;
 
         animation: ticker 26s linear infinite;
+
+        transform: translate3d(0, 0, 0);
       }
 
       .ticker-group {
         flex: none;
 
+        min-width: 100vw;
+
         display: flex;
 
         align-items: center;
+
+        justify-content: space-around;
 
         gap: 28px;
 
         white-space: nowrap;
 
-        padding: 18px 28px 18px 0;
+        padding: 18px 28px;
 
         font-size: 12px;
 
         letter-spacing: 0.17em;
+
+        line-height: 1;
       }
 
       .ticker-group i {
@@ -959,11 +1049,11 @@
 
       @keyframes ticker {
         from {
-          transform: translateX(0);
+          transform: translate3d(0, 0, 0);
         }
 
         to {
-          transform: translateX(-50%);
+          transform: translate3d(-50%, 0, 0);
         }
       }
 
@@ -1495,92 +1585,59 @@
         font-weight: 600;
       }
 
-      .lead-form {
+      .booking-widget {
         background: #fff;
-
-        padding: 24px;
-
-        border-radius: 22px;
-
         border: 1px solid #e3e3df;
-
-        display: grid;
-
-        gap: 16px;
-
+        border-radius: 22px;
+        overflow: hidden;
+        min-height: 690px;
         align-self: start;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.05);
       }
 
-      .lead-form label {
-        display: grid;
-
-        gap: 7px;
-
-        font-size: 12px;
-
-        font-weight: 600;
-      }
-
-      .lead-form input,
-      .lead-form select {
-        width: 100%;
-
-        height: 50px;
-
-        border: 1px solid var(--line);
-
-        border-radius: 10px;
-
+      .booking-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--line);
         background: #fff;
-
-        padding: 0 14px;
-
-        color: var(--ink);
-
-        outline: none;
-
-        transition:
-          border 0.2s ease,
-          box-shadow 0.2s ease;
       }
 
-      .lead-form input:focus,
-      .lead-form select:focus {
-        border-color: var(--ink);
-
-        box-shadow: 0 0 0 3px rgba(30, 30, 30, 0.06);
+      .booking-topline strong {
+        font-size: 14px;
       }
 
-      .form-submit {
-        width: 100%;
-
-        margin-top: 4px;
-      }
-
-      .form-note {
-        font-size: 11px;
-
+      .booking-topline span {
+        font-size: 10px;
+        letter-spacing: 0.12em;
         color: var(--muted);
+      }
 
-        text-align: center;
+      .cal-inline {
+        width: 100%;
+        min-height: 620px;
+        background: #fff;
+      }
 
+      .booking-note {
         margin: 0;
-
+        padding: 14px 20px 18px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        font-size: 11px;
+        color: var(--muted);
         line-height: 1.45;
       }
 
-      .form-note button {
+      .booking-note button {
         border: 0;
-
         background: none;
-
-        text-decoration: underline;
-
         padding: 0;
-
-        cursor: pointer;
-
         color: inherit;
+        text-decoration: underline;
+        cursor: pointer;
       }
 
       /* ======================================================
@@ -1728,11 +1785,16 @@
       }
 
       .footer-brand {
-        font-size: 20px;
+        display: inline-flex;
+        align-items: center;
+        width: 132px;
+      }
 
-        font-weight: 700;
-
-        letter-spacing: 0.2em;
+      .footer-brand img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
       }
 
       .footer-copy {
@@ -2071,7 +2133,17 @@
 
           border-radius: 0 0 18px 18px;
 
-          grid-template-columns: 1fr auto;
+          grid-template-columns: 1fr auto 1fr;
+        }
+
+        .brand {
+          width: 58px;
+          height: 58px;
+        }
+
+        .brand img {
+          width: 58px;
+          height: 58px;
         }
 
         .desktop-nav,
@@ -2088,15 +2160,15 @@
         }
 
         .header-handle {
-          width: 96px;
+          width: 116px;
 
-          height: 17px;
+          height: 18px;
         }
 
         .header-handle:hover {
-          width: 108px;
+          width: 132px;
 
-          height: 20px;
+          height: 22px;
         }
 
         .hero {
@@ -2274,11 +2346,9 @@
 
     <!-- ======================================================
        HEADER
-  ====================================================== -->
+    ====================================================== -->
 
     <header class="site-header is-visible">
-      <a class="brand" href="#top" aria-label="STATX accueil"> STATX </a>
-
       <nav class="desktop-nav" aria-label="Navigation principale">
         <a href="#methode"> Méthode </a>
 
@@ -2286,6 +2356,10 @@
 
         <a href="#faq"> FAQ </a>
       </nav>
+
+      <a class="brand" href="#top" aria-label="STATX — accueil">
+        <img src="/logo.png" alt="STATX — calisthénie statique" width="1254" height="1254" />
+      </a>
 
       <a class="header-cta" href="#appel"> Appel gratuit ↗ </a>
 
@@ -2349,7 +2423,7 @@
 
       <section class="hero section-shell">
         <div class="hero-copy reveal">
-          <p class="eyebrow">POUR LES PRATIQUANTS DE STATIQUE</p>
+          <p class="eyebrow">POUR LES PRATIQUANTS DE CALISTHÉNIE STATIQUE</p>
 
           <h1>
             Arrête de t’entraîner
@@ -2362,7 +2436,7 @@
           </h1>
 
           <p class="hero-lead">
-            Planche, front lever, handstand et plus : une méthode claire pour
+            En calisthénie statique : planche, front lever, handstand et plus. Une méthode claire pour
             mieux hiérarchiser tes priorités, comprendre ce qui te bloque et
             progresser avec plus de cohérence.
           </p>
@@ -2678,64 +2752,21 @@
             </div>
           </div>
 
-          <form class="lead-form" id="lead-form">
-            <label>
-              <span> Prénom </span>
+          <div class="booking-widget">
+            <div class="booking-topline">
+              <strong>Choisis ton créneau</strong>
+              <span>APPEL GRATUIT · 20 MIN</span>
+            </div>
 
-              <input
-                type="text"
-                name="firstName"
-                autocomplete="given-name"
-                placeholder="Ton prénom"
-                required
-              />
-            </label>
+            <div id="my-cal-inline" class="cal-inline"></div>
 
-            <label>
-              <span> Email </span>
-
-              <input
-                type="email"
-                name="email"
-                autocomplete="email"
-                placeholder="toi@email.fr"
-                required
-              />
-            </label>
-
-            <label>
-              <span> Objectif principal </span>
-
-              <select name="goal" required>
-                <option value="" selected disabled>Choisis ton objectif</option>
-
-                <option>Planche</option>
-
-                <option>Front Lever</option>
-
-                <option>Handstand / HSPU</option>
-
-                <option>Organisation générale</option>
-
-                <option>Autre</option>
-              </select>
-            </label>
-
-            <button class="btn btn-primary form-submit" type="submit">
-              Voir les créneaux gratuits
-
-              <span> ↗ </span>
-            </button>
-
-            <p class="form-note">
-              Appel gratuit, sans engagement. En continuant, tu seras redirigé
-              vers la prise de rendez-vous.
-
+            <p class="booking-note">
+              Gratuit · Sans engagement · La réservation se fait directement ici.
               <button type="button" data-dialog-open="privacy-dialog">
                 Confidentialité
               </button>
             </p>
-          </form>
+          </div>
         </div>
       </section>
 
@@ -2844,7 +2875,9 @@
   ====================================================== -->
 
     <footer class="site-footer section-shell">
-      <div class="footer-brand">STATX</div>
+      <div class="footer-brand">
+        <img src="/logo.png" alt="STATX" width="1254" height="1254" loading="lazy" />
+      </div>
 
       <div class="footer-copy">© 2026 STATX — Tous droits réservés.</div>
 
@@ -3095,7 +3128,7 @@
        BOOKING
     ====================================================== */
 
-      const BOOKING_URL = "https://cal.com/TON-LIEN";
+      const CAL_LINK = "TON-PSEUDO/appel-statx";
 
       /* ======================================================
        REVEAL AU SCROLL
@@ -3262,23 +3295,69 @@
       }
 
       /* ======================================================
-       FORM
+       CAL.COM INLINE
     ====================================================== */
 
-      const form = document.querySelector("#lead-form");
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document;
 
-      form?.addEventListener("submit", (event) => {
-        event.preventDefault();
+        C.Cal =
+          C.Cal ||
+          function () {
+            let cal = C.Cal;
+            let ar = arguments;
 
-        if (BOOKING_URL.includes("TON-LIEN")) {
-          alert(
-            "Ajoute d’abord ton vrai lien de réservation dans BOOKING_URL avant la mise en ligne.",
-          );
+            if (!cal.loaded) {
+              cal.ns = {};
+              cal.q = cal.q || [];
+              d.head.appendChild(d.createElement("script")).src = A;
+              cal.loaded = true;
+            }
 
-          return;
-        }
+            if (ar[0] === L) {
+              const api = function () { p(api, arguments); };
+              const namespace = ar[1];
 
-        window.location.href = BOOKING_URL;
+              api.q = api.q || [];
+
+              if (typeof namespace === "string") {
+                cal.ns[namespace] = cal.ns[namespace] || api;
+                p(cal.ns[namespace], ar);
+                p(cal, ["initNamespace", namespace]);
+              } else {
+                p(cal, ar);
+              }
+
+              return;
+            }
+
+            p(cal, ar);
+          };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "statx", {
+        origin: "https://cal.com",
+      });
+
+      Cal.ns.statx("inline", {
+        elementOrSelector: "#my-cal-inline",
+        calLink: CAL_LINK,
+        config: {
+          layout: "month_view",
+          theme: "light",
+        },
+      });
+
+      Cal.ns.statx("ui", {
+        theme: "light",
+        styles: {
+          branding: {
+            brandColor: "#1e1e1e",
+          },
+        },
+        hideEventTypeDetails: false,
+        layout: "month_view",
       });
 
       /* ======================================================
@@ -3399,7 +3478,7 @@
       document.addEventListener(
         "mousemove",
         (event) => {
-          if (event.clientY <= 12) {
+          if (event.clientY <= 44) {
             showHeader();
           }
         },

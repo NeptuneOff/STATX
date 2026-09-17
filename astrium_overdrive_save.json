@@ -1,0 +1,13 @@
+{
+  "cores": 0,
+  "best_score": 0,
+  "best_wave": 1,
+  "runs": 1,
+  "meta": {
+    "hull": 0,
+    "weapon": 0,
+    "thrusters": 0,
+    "reactor": 0,
+    "collector": 0
+  }
+}
